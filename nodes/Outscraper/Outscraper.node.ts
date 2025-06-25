@@ -91,50 +91,50 @@ export class Outscraper implements INodeType {
 			{
 				displayName: 'Resource',
 				name: 'resource',
-        type: 'options',
-        noDataExpression: true,
-        options: [
-          {
-            name: 'Expedia',
-            value: 'expedia',
-          },
-          {
-            name: 'G2 Review',
-            value: 'g2Reviews',
-          },
-          {
-            name: 'Google Map',
-            value: 'googleMaps',
-          },
-          {
-            name: 'Google Search',
-            value: 'googleSearch',
-          },
-          {
-            name: 'Indeed',
-            value: 'indeed',
-          },
-          {
-            name: 'Product Hunt',
-            value: 'productHunt',
-          },
-          {
-            name: 'TripAdvisor',
-            value: 'tripadvisor',
-          },
-          {
-            name: 'Trustpilot',
-            value: 'trustpilot',
-          },
-          {
-            name: 'Yelp',
-            value: 'yelp',
-          },
-          {
-            name: 'YouTube',
-            value: 'youtube',
-          },
-        ],
+				type: 'options',
+				noDataExpression: true,
+				options: [
+					{
+						name: 'Expedia',
+						value: 'expedia',
+					},
+					{
+						name: 'G2 Review',
+						value: 'g2Reviews',
+					},
+					{
+						name: 'Google Map',
+						value: 'googleMaps',
+					},
+					{
+						name: 'Google Search',
+						value: 'googleSearch',
+					},
+					{
+						name: 'Indeed',
+						value: 'indeed',
+					},
+					{
+						name: 'Product Hunt',
+						value: 'productHunt',
+					},
+					{
+						name: 'TripAdvisor',
+						value: 'tripadvisor',
+					},
+					{
+						name: 'Trustpilot',
+						value: 'trustpilot',
+					},
+					{
+						name: 'Yelp',
+						value: 'yelp',
+					},
+					{
+						name: 'YouTube',
+						value: 'youtube',
+					},
+				],
 				default: 'googleMaps',
 			},
 

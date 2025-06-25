@@ -83,6 +83,12 @@ export const trustpilotFields: INodeProperties[] = [
 			minValue: 1,
 		},
 		default: 50,
+		displayOptions: {
+			show: {
+				resource: ['trustpilot'],
+				operation: ['search', 'reviews'],
+			},
+		},
 		description: 'Max number of results to return',
 		routing: {
 			send: {

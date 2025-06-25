@@ -61,6 +61,12 @@ export const g2ReviewsFields: INodeProperties[] = [
 			minValue: 1,
 		},
 		default: 50,
+		displayOptions: {
+			show: {
+				resource: ['g2Reviews'],
+				operation: ['reviews'],
+			},
+		},
 		description: 'Max number of results to return',
 		routing: {
 			send: {
@@ -73,19 +79,25 @@ export const g2ReviewsFields: INodeProperties[] = [
 		displayName: 'Sort',
 		name: 'sort',
 		type: 'options',
-		default: 'default',
+		default: 'g2_default',
+		displayOptions: {
+			show: {
+				resource: ['g2Reviews'],
+				operation: ['reviews'],
+			},
+		},
 		options: [
 			{
 				name: 'G2 Default',
-				value: 'default',
+				value: 'g2_default',
 			},
 			{
 				name: 'Highest Rated',
-				value: 'highest_rating',
+				value: 'highest_rated',
 			},
 			{
 				name: 'Lowest Rated',
-				value: 'lowest_rating',
+				value: 'lowest_rated',
 			},
 			{
 				name: 'Most Helpful',

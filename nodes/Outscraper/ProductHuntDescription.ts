@@ -60,6 +60,11 @@ export const productHuntFields: INodeProperties[] = [
 			minValue: 1,
 		},
 		default: 50,
+		displayOptions: {
+			show: {
+				resource: ['productHunt'],
+			},
+		},
 		description: 'Max number of results to return',
 		routing: {
 			send: {
@@ -102,16 +107,16 @@ export const productHuntFields: INodeProperties[] = [
 				value: 'BEST',
 			},
 			{
-				name: 'Latest',
-				value: 'LATEST',
+				name: 'Critical',
+				value: 'CRITICAL',
 			},
 			{
 				name: 'Favorable',
 				value: 'FAVORABLE',
 			},
 			{
-				name: 'Critical',
-				value: 'CRITICAL',
+				name: 'Latest',
+				value: 'LATEST',
 			},
 		],
 		description: 'Sort order for reviews',
@@ -145,87 +150,32 @@ export const productHuntFields: INodeProperties[] = [
 		name: 'language',
 		type: 'options',
 		default: 'en',
+		displayOptions: {
+			show: {
+				resource: ['productHunt'],
+			},
+		},
 		options: [
-			{
-				name: 'Arabic',
-				value: 'ar',
-			},
-			{
-				name: 'Chinese (Simplified)',
-				value: 'zh-CN',
-			},
-			{
-				name: 'Chinese (Traditional)',
-				value: 'zh-TW',
-			},
-			{
-				name: 'Croatian',
-				value: 'hr',
-			},
-			{
-				name: 'Dutch',
-				value: 'nl',
-			},
-			{
-				name: 'English',
-				value: 'en',
-			},
-			{
-				name: 'French',
-				value: 'fr',
-			},
-			{
-				name: 'German',
-				value: 'de',
-			},
-			{
-				name: 'Italian',
-				value: 'it',
-			},
-			{
-				name: 'Japanese',
-				value: 'ja',
-			},
-			{
-				name: 'Korean',
-				value: 'ko',
-			},
-			{
-				name: 'Polish',
-				value: 'pl',
-			},
-			{
-				name: 'Portuguese (Brazil)',
-				value: 'pt-BR',
-			},
-			{
-				name: 'Portuguese (Portugal)',
-				value: 'pt-PT',
-			},
-			{
-				name: 'Russian',
-				value: 'ru',
-			},
-			{
-				name: 'Spanish',
-				value: 'es',
-			},
-			{
-				name: 'Spanish (Latin America)',
-				value: 'es-419',
-			},
-			{
-				name: 'Thai',
-				value: 'th',
-			},
-			{
-				name: 'Turkish',
-				value: 'tr',
-			},
-			{
-				name: 'Vietnamese',
-				value: 'vi',
-			},
+			{ name: 'Arabic', value: 'ar' },
+			{ name: 'Chinese (Simplified)', value: 'zh-CN' },
+			{ name: 'Chinese (Traditional)', value: 'zh-TW' },
+			{ name: 'Croatian', value: 'hr' },
+			{ name: 'Dutch', value: 'nl' },
+			{ name: 'English', value: 'en' },
+			{ name: 'French', value: 'fr' },
+			{ name: 'German', value: 'de' },
+			{ name: 'Italian', value: 'it' },
+			{ name: 'Japanese', value: 'ja' },
+			{ name: 'Korean', value: 'ko' },
+			{ name: 'Polish', value: 'pl' },
+			{ name: 'Portuguese (Brazil)', value: 'pt-BR' },
+			{ name: 'Portuguese (Portugal)', value: 'pt-PT' },
+			{ name: 'Russian', value: 'ru' },
+			{ name: 'Spanish', value: 'es' },
+			{ name: 'Spanish (Latin America)', value: 'es-419' },
+			{ name: 'Thai', value: 'th' },
+			{ name: 'Turkish', value: 'tr' },
+			{ name: 'Vietnamese', value: 'vi' },
 		],
 		description: 'Language to use for website',
 		routing: {
@@ -256,7 +206,6 @@ export const productHuntFields: INodeProperties[] = [
 			{ name: 'Japan', value: 'JP' },
 			{ name: 'United Kingdom', value: 'GB' },
 			{ name: 'United States', value: 'US' },
-			// Adding a few more common regions, not all 200+ regions to keep the list manageable
 		],
 		description: 'Country to use for website (recommended for better search experience)',
 		routing: {

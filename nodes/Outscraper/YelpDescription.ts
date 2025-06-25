@@ -83,6 +83,12 @@ export const yelpFields: INodeProperties[] = [
 			minValue: 1,
 		},
 		default: 50,
+		displayOptions: {
+			show: {
+				resource: ['yelp'],
+				operation: ['search'],
+			},
+		},
 		description: 'Max number of results to return',
 		routing: {
 			send: {
@@ -170,6 +176,12 @@ export const yelpFields: INodeProperties[] = [
 		name: 'sort',
 		type: 'options',
 		default: 'relevance_desc',
+		displayOptions: {
+			show: {
+				resource: ['yelp'],
+				operation: ['reviews'],
+			},
+		},
 		options: [
 			{
 				name: 'Date (Ascending)',
