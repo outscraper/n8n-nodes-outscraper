@@ -59,7 +59,7 @@ export class Outscraper implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Outscraper',
 		name: 'outscraper',
-		icon: 'file:outscraper.svg',
+		icon: 'file:../../icons/outscraper.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["resource"] + ": " + $parameter["operation"]}}',
