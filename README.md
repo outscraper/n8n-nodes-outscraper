@@ -94,7 +94,7 @@ To use this node, you need an Outscraper API key.
 ### 0.1.0 (2025-06-25)
 
 * Initial release
-* Support for Google Maps, Google Search, YouTube, Trustpilot, TripAdvisor, Expedia, and G2 Reviews
+* Support for Google Maps, Google Search
 
 ## License
 
