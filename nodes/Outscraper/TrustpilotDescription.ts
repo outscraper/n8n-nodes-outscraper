@@ -17,7 +17,7 @@ export const trustpilotOperations: INodeProperties[] = [
 				name: 'Get Business Info',
 				value: 'business',
 				description: 'Get business information from Trustpilot',
-				action: 'Get business information from Trustpilot',
+				action: 'Get business information from trustpilot',
 				routing: {
 					request: {
 						method: 'GET',
@@ -29,7 +29,7 @@ export const trustpilotOperations: INodeProperties[] = [
 				name: 'Search',
 				value: 'search',
 				description: 'Search businesses on Trustpilot',
-				action: 'Search businesses on Trustpilot',
+				action: 'Search businesses on trustpilot',
 				routing: {
 					request: {
 						method: 'GET',
@@ -41,7 +41,7 @@ export const trustpilotOperations: INodeProperties[] = [
 				name: 'Get Reviews',
 				value: 'reviews',
 				description: 'Get reviews from Trustpilot',
-				action: 'Get reviews from Trustpilot',
+				action: 'Get reviews from trustpilot',
 				routing: {
 					request: {
 						method: 'GET',
@@ -79,14 +79,11 @@ export const trustpilotFields: INodeProperties[] = [
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
-		default: 100,
-		displayOptions: {
-			show: {
-				resource: ['trustpilot'],
-				operation: ['search', 'reviews'],
-			},
+		typeOptions: {
+			minValue: 1,
 		},
-		description: 'Limit of results to return',
+		default: 50,
+		description: 'Max number of results to return',
 		routing: {
 			send: {
 				type: 'query',
@@ -151,24 +148,24 @@ export const trustpilotFields: INodeProperties[] = [
 		},
 		options: [
 			{
-				name: 'Default',
-				value: 'default',
-			},
-			{
 				name: 'All',
 				value: 'all',
+			},
+			{
+				name: 'Default',
+				value: 'default',
 			},
 			{
 				name: 'English',
 				value: 'en',
 			},
 			{
-				name: 'Spanish',
-				value: 'es',
-			},
-			{
 				name: 'German',
 				value: 'de',
+			},
+			{
+				name: 'Spanish',
+				value: 'es',
 			},
 		],
 		description: 'Language filter for reviews',

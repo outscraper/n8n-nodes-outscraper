@@ -17,7 +17,7 @@ export const googleMapsSearchOperations: INodeProperties[] = [
 				name: 'Search',
 				value: 'search',
 				description: 'Search for businesses on Google Maps',
-				action: 'Search for businesses on Google Maps',
+				action: 'Search for businesses on google maps',
 				routing: {
 					request: {
 						method: 'GET',
@@ -29,7 +29,7 @@ export const googleMapsSearchOperations: INodeProperties[] = [
 				name: 'Get Reviews',
 				value: 'reviews',
 				description: 'Get reviews for a place on Google Maps',
-				action: 'Get reviews for a place on Google Maps',
+				action: 'Get reviews for a place on google maps',
 				routing: {
 					request: {
 						method: 'GET',
@@ -41,7 +41,7 @@ export const googleMapsSearchOperations: INodeProperties[] = [
 				name: 'Get Photos',
 				value: 'photos',
 				description: 'Get photos for a place on Google Maps',
-				action: 'Get photos for a place on Google Maps',
+				action: 'Get photos for a place on google maps',
 				routing: {
 					request: {
 						method: 'GET',
@@ -80,14 +80,17 @@ export const googleMapsSearchFields: INodeProperties[] = [
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
-		default: 500,
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
 		displayOptions: {
 			show: {
 				resource: ['googleMaps'],
 				operation: ['search'],
 			},
 		},
-		description: 'Limit of organizations to take from one query search (max 500)',
+		description: 'Max number of results to return',
 		routing: {
 			send: {
 				type: 'query',

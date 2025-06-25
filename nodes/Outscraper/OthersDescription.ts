@@ -57,14 +57,11 @@ export const g2ReviewsFields: INodeProperties[] = [
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
-		default: 100,
-		displayOptions: {
-			show: {
-				resource: ['g2Reviews'],
-				operation: ['reviews'],
-			},
+		typeOptions: {
+			minValue: 1,
 		},
-		description: 'Limit of reviews to get from one query',
+		default: 50,
+		description: 'Max number of results to return',
 		routing: {
 			send: {
 				type: 'query',
@@ -76,33 +73,27 @@ export const g2ReviewsFields: INodeProperties[] = [
 		displayName: 'Sort',
 		name: 'sort',
 		type: 'options',
-		default: 'g2_default',
-		displayOptions: {
-			show: {
-				resource: ['g2Reviews'],
-				operation: ['reviews'],
-			},
-		},
+		default: 'default',
 		options: [
 			{
 				name: 'G2 Default',
-				value: 'g2_default',
+				value: 'default',
 			},
 			{
-				name: 'Most Recent',
-				value: 'most_recent',
+				name: 'Highest Rated',
+				value: 'highest_rating',
+			},
+			{
+				name: 'Lowest Rated',
+				value: 'lowest_rating',
 			},
 			{
 				name: 'Most Helpful',
 				value: 'most_helpful',
 			},
 			{
-				name: 'Highest Rated',
-				value: 'highest_rated',
-			},
-			{
-				name: 'Lowest Rated',
-				value: 'lowest_rated',
+				name: 'Most Recent',
+				value: 'most_recent',
 			},
 		],
 		description: 'Sort order for reviews',
