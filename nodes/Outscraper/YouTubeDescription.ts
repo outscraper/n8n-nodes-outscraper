@@ -16,19 +16,19 @@ export const youtubeOperations: INodeProperties[] = [
 				name: 'Search',
 				value: 'search',
 				description: 'Search for videos on YouTube',
-				action: 'Search for videos on YouTube',
+				action: 'Search for videos on you tube',
 			},
 			{
 				name: 'Channel',
 				value: 'channel',
 				description: 'Get YouTube channel information',
-				action: 'Get YouTube channel information',
+				action: 'Get you tube channel information',
 			},
 			{
 				name: 'Comments',
 				value: 'comments',
 				description: 'Get comments from YouTube videos',
-				action: 'Get comments from YouTube videos',
+				action: 'Get comments from you tube videos',
 			},
 		],
 		default: 'search',
@@ -95,14 +95,17 @@ export const youtubeSearchFields: INodeProperties[] = [
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
+		typeOptions: {
+			minValue: 1,
+		},
 		displayOptions: {
 			show: {
 				resource: ['youtube'],
 				operation: ['search'],
 			},
 		},
-		default: 100,
-		description: 'The maximum number of results to return',
+		default: 50,
+		description: 'Max number of results to return',
 		placeholder: '100',
 	},
 	{
@@ -300,7 +303,7 @@ export const youtubeCommentsFields: INodeProperties[] = [
 				type: 'string',
 				default: '',
 				description: 'Fields to include in the response (comma-separated)',
-				placeholder: 'e.g., id,content,published',
+				placeholder: 'e.g., ID,content,published',
 			},
 			{
 				displayName: 'Language',

@@ -17,7 +17,7 @@ export const googleSearchOperations: INodeProperties[] = [
 				name: 'Search',
 				value: 'search',
 				description: 'Search on Google',
-				action: 'Search on Google',
+				action: 'Search on google',
 				routing: {
 					request: {
 						method: 'GET',
@@ -26,14 +26,14 @@ export const googleSearchOperations: INodeProperties[] = [
 				},
 			},
 			{
-				name: 'Search News',
-				value: 'searchNews',
-				description: 'Search for news on Google',
-				action: 'Search for news on Google',
+				name: 'Search Careers',
+				value: 'searchCareers',
+				description: 'Search for career listings on Google',
+				action: 'Search for career listings on google',
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/google-search-news',
+						url: '/google-search-careers',
 					},
 				},
 			},
@@ -41,7 +41,7 @@ export const googleSearchOperations: INodeProperties[] = [
 				name: 'Search Events',
 				value: 'searchEvents',
 				description: 'Search for events on Google',
-				action: 'Search for events on Google',
+				action: 'Search for events on google',
 				routing: {
 					request: {
 						method: 'GET',
@@ -50,22 +50,10 @@ export const googleSearchOperations: INodeProperties[] = [
 				},
 			},
 			{
-				name: 'Search Videos',
-				value: 'searchVideos',
-				description: 'Search for videos on Google',
-				action: 'Search for videos on Google',
-				routing: {
-					request: {
-						method: 'GET',
-						url: '/google-search-videos',
-					},
-				},
-			},
-			{
 				name: 'Search Images',
 				value: 'searchImages',
 				description: 'Search for images on Google',
-				action: 'Search for images on Google',
+				action: 'Search for images on google',
 				routing: {
 					request: {
 						method: 'GET',
@@ -74,10 +62,22 @@ export const googleSearchOperations: INodeProperties[] = [
 				},
 			},
 			{
+				name: 'Search News',
+				value: 'searchNews',
+				description: 'Search for news on Google',
+				action: 'Search for news on google',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/google-search-news',
+					},
+				},
+			},
+			{
 				name: 'Search Shopping',
 				value: 'searchShopping',
 				description: 'Search for shopping products on Google',
-				action: 'Search for shopping products on Google',
+				action: 'Search for shopping products on google',
 				routing: {
 					request: {
 						method: 'GET',
@@ -86,14 +86,14 @@ export const googleSearchOperations: INodeProperties[] = [
 				},
 			},
 			{
-				name: 'Search Careers',
-				value: 'searchCareers',
-				description: 'Search for career listings on Google',
-				action: 'Search for career listings on Google',
+				name: 'Search Videos',
+				value: 'searchVideos',
+				description: 'Search for videos on Google',
+				action: 'Search for videos on google',
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/google-search-careers',
+						url: '/google-search-videos',
 					},
 				},
 			},
@@ -195,45 +195,32 @@ export const googleSearchFields: INodeProperties[] = [
 		},
 		options: [
 			{
-				displayName: 'Region',
-				name: 'region',
-				type: 'string',
-				default: 'us',
-				description: 'Country code for localized results (e.g., us, uk, fr)',
-				routing: {
-					send: {
-						type: 'query',
-						property: 'region',
-					},
-				},
-			},
-			{
 				displayName: 'Date Range',
 				name: 'tbs',
 				type: 'options',
 				options: [
 					{
-						name: 'Past Hour',
-						value: 'h',
-					},
-					{
 						name: 'Past 24 Hours',
 						value: 'd',
 					},
 					{
-						name: 'Past Week',
-						value: 'w',
+						name: 'Past Hour',
+						value: 'h',
 					},
 					{
 						name: 'Past Month',
 						value: 'm',
 					},
 					{
+						name: 'Past Week',
+						value: 'w',
+					},
+					{
 						name: 'Past Year',
 						value: 'y',
 					},
 				],
-				default: '',
+				default: 'h',
 				description: 'Filter results by date range',
 				routing: {
 					send: {
@@ -243,15 +230,28 @@ export const googleSearchFields: INodeProperties[] = [
 				},
 			},
 			{
-				displayName: 'UULE Parameter',
-				name: 'uule',
+				displayName: 'Fields',
+				name: 'fields',
 				type: 'string',
 				default: '',
-				description: 'Google UULE parameter to encode a specific location',
+				description: 'Specific fields to return (comma-separated)',
 				routing: {
 					send: {
 						type: 'query',
-						property: 'uule',
+						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'Region',
+				name: 'region',
+				type: 'string',
+				default: 'us',
+				description: 'Country code for localized results (e.g., us, uk, fr)',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'region',
 					},
 				},
 			},
@@ -269,15 +269,15 @@ export const googleSearchFields: INodeProperties[] = [
 				},
 			},
 			{
-				displayName: 'Fields',
-				name: 'fields',
+				displayName: 'UULE Parameter',
+				name: 'uule',
 				type: 'string',
 				default: '',
-				description: 'Specific fields to return (comma-separated)',
+				description: 'Google UULE parameter to encode a specific location',
 				routing: {
 					send: {
 						type: 'query',
-						property: 'fields',
+						property: 'uule',
 					},
 				},
 			},

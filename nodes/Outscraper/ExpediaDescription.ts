@@ -17,7 +17,7 @@ export const expediaOperations: INodeProperties[] = [
 				name: 'Search',
 				value: 'search',
 				description: 'Search on Expedia',
-				action: 'Search on Expedia',
+				action: 'Search on expedia',
 				routing: {
 					request: {
 						method: 'GET',
@@ -29,7 +29,7 @@ export const expediaOperations: INodeProperties[] = [
 				name: 'Get Reviews',
 				value: 'reviews',
 				description: 'Get reviews from Expedia',
-				action: 'Get reviews from Expedia',
+				action: 'Get reviews from expedia',
 				routing: {
 					request: {
 						method: 'GET',
@@ -68,14 +68,17 @@ export const expediaSearchFields: INodeProperties[] = [
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
-		default: 100,
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
 		displayOptions: {
 			show: {
 				resource: ['expedia'],
 				operation: ['search'],
 			},
 		},
-		description: 'Limit of results to return',
+		description: 'Max number of results to return',
 		routing: {
 			send: {
 				type: 'query',

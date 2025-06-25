@@ -17,7 +17,7 @@ export const yelpOperations: INodeProperties[] = [
 				name: 'Search',
 				value: 'search',
 				description: 'Search on Yelp',
-				action: 'Search on Yelp',
+				action: 'Search on yelp',
 				routing: {
 					request: {
 						method: 'GET',
@@ -29,7 +29,7 @@ export const yelpOperations: INodeProperties[] = [
 				name: 'Business',
 				value: 'business',
 				description: 'Get business information from Yelp',
-				action: 'Get business information from Yelp',
+				action: 'Get business information from yelp',
 				routing: {
 					request: {
 						method: 'GET',
@@ -41,7 +41,7 @@ export const yelpOperations: INodeProperties[] = [
 				name: 'Reviews',
 				value: 'reviews',
 				description: 'Get reviews from Yelp businesses',
-				action: 'Get reviews from Yelp businesses',
+				action: 'Get reviews from yelp businesses',
 				routing: {
 					request: {
 						method: 'GET',
@@ -79,14 +79,17 @@ export const yelpFields: INodeProperties[] = [
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
-		default: 100,
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
 		displayOptions: {
 			show: {
 				resource: ['yelp'],
 				operation: ['search'],
 			},
 		},
-		description: 'Limit of results to return',
+		description: 'Max number of results to return',
 		routing: {
 			send: {
 				type: 'query',
@@ -181,28 +184,28 @@ export const yelpFields: INodeProperties[] = [
 		},
 		options: [
 			{
-				name: 'Relevance (Descending)',
-				value: 'relevance_desc',
+				name: 'Date (Ascending)',
+				value: 'date_asc',
 			},
 			{
 				name: 'Date (Descending)',
 				value: 'date_desc',
 			},
 			{
-				name: 'Date (Ascending)',
-				value: 'date_asc',
-			},
-			{
-				name: 'Rating (Descending)',
-				value: 'rating_desc',
+				name: 'Elites (Descending)',
+				value: 'elites_desc',
 			},
 			{
 				name: 'Rating (Ascending)',
 				value: 'rating_asc',
 			},
 			{
-				name: 'Elites (Descending)',
-				value: 'elites_desc',
+				name: 'Rating (Descending)',
+				value: 'rating_desc',
+			},
+			{
+				name: 'Relevance (Descending)',
+				value: 'relevance_desc',
 			},
 		],
 		description: 'Sort order for reviews',

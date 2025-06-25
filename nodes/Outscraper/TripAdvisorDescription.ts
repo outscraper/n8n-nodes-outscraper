@@ -17,7 +17,7 @@ export const tripadvisorOperations: INodeProperties[] = [
 				name: 'Get Reviews',
 				value: 'reviews',
 				description: 'Get reviews from TripAdvisor',
-				action: 'Get reviews from TripAdvisor',
+				action: 'Get reviews from trip advisor',
 				routing: {
 					request: {
 						method: 'GET',
@@ -29,7 +29,7 @@ export const tripadvisorOperations: INodeProperties[] = [
 				name: 'Search',
 				value: 'search',
 				description: 'Search on TripAdvisor',
-				action: 'Search on TripAdvisor',
+				action: 'Search on trip advisor',
 				routing: {
 					request: {
 						method: 'GET',
@@ -67,13 +67,16 @@ export const tripadvisorFields: INodeProperties[] = [
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
-		default: 100,
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
 		displayOptions: {
 			show: {
 				resource: ['tripadvisor'],
 			},
 		},
-		description: 'Limit of results to return',
+		description: 'Max number of results to return',
 		routing: {
 			send: {
 				type: 'query',

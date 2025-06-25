@@ -17,7 +17,7 @@ export const indeedOperations: INodeProperties[] = [
 				name: 'Job Search',
 				value: 'jobSearch',
 				description: 'Get jobs from Indeed',
-				action: 'Get jobs from Indeed',
+				action: 'Get jobs from indeed',
 				routing: {
 					request: {
 						method: 'GET',
@@ -29,7 +29,7 @@ export const indeedOperations: INodeProperties[] = [
 				name: 'Reviews',
 				value: 'reviews',
 				description: 'Get reviews from Indeed companies',
-				action: 'Get reviews from Indeed companies',
+				action: 'Get reviews from indeed companies',
 				routing: {
 					request: {
 						method: 'GET',
@@ -69,13 +69,16 @@ export const indeedFields: INodeProperties[] = [
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
-		default: 100,
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
 		displayOptions: {
 			show: {
 				resource: ['indeed'],
 			},
 		},
-		description: 'Limit of items to return',
+		description: 'Max number of results to return',
 		routing: {
 			send: {
 				type: 'query',

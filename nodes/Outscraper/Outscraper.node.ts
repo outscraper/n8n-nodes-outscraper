@@ -95,7 +95,15 @@ export class Outscraper implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Google Maps',
+						name: 'Expedia',
+						value: 'expedia',
+					},
+					{
+						name: 'G2 Review',
+						value: 'g2Reviews',
+					},
+					{
+						name: 'Google Map',
 						value: 'googleMaps',
 					},
 					{
@@ -103,36 +111,28 @@ export class Outscraper implements INodeType {
 						value: 'googleSearch',
 					},
 					{
-						name: 'G2 Reviews',
-						value: 'g2Reviews',
-					},
-					{
-						name: 'Trustpilot',
-						value: 'trustpilot',
-					},
-					{
-						name: 'TripAdvisor',
-						value: 'tripadvisor',
-					},
-					{
-						name: 'Expedia',
-						value: 'expedia',
-					},
-					{
-						name: 'YouTube',
-						value: 'youtube',
-					},
-					{
-						name: 'Yelp',
-						value: 'yelp',
+						name: 'Indeed',
+						value: 'indeed',
 					},
 					{
 						name: 'Product Hunt',
 						value: 'productHunt',
 					},
 					{
-						name: 'Indeed',
-						value: 'indeed',
+						name: 'TripAdvisor',
+						value: 'tripadvisor',
+					},
+					{
+						name: 'Trustpilot',
+						value: 'trustpilot',
+					},
+					{
+						name: 'Yelp',
+						value: 'yelp',
+					},
+					{
+						name: 'YouTube',
+						value: 'youtube',
 					},
 				],
 				default: 'googleMaps',
