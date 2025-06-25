@@ -208,6 +208,43 @@ export const tripadvisorFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'UI',
+		name: 'ui',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['tripadvisor'],
+			},
+		},
+		description: 'Whether to execute the request as a UI task',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'ui',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['tripadvisor'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
 		displayName: 'Additional Fields',
 		name: 'additionalFields',
 		type: 'collection',

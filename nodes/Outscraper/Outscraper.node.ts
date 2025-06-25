@@ -40,6 +40,21 @@ import {
 	youtubeCommentsFields,
 } from './YouTubeDescription';
 
+import {
+	yelpOperations,
+	yelpFields,
+} from './YelpDescription';
+
+import {
+	productHuntOperations,
+	productHuntFields,
+} from './ProductHuntDescription';
+
+import {
+	indeedOperations,
+	indeedFields,
+} from './IndeedDescription';
+
 export class Outscraper implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Outscraper',
@@ -107,6 +122,18 @@ export class Outscraper implements INodeType {
 						name: 'YouTube',
 						value: 'youtube',
 					},
+					{
+						name: 'Yelp',
+						value: 'yelp',
+					},
+					{
+						name: 'Product Hunt',
+						value: 'productHunt',
+					},
+					{
+						name: 'Indeed',
+						value: 'indeed',
+					},
 				],
 				default: 'googleMaps',
 			},
@@ -143,6 +170,18 @@ export class Outscraper implements INodeType {
 			...youtubeSearchFields,
 			...youtubeChannelFields,
 			...youtubeCommentsFields,
+
+			// Yelp operations
+			...yelpOperations,
+			...yelpFields,
+
+			// Product Hunt operations
+			...productHuntOperations,
+			...productHuntFields,
+
+			// Indeed operations
+			...indeedOperations,
+			...indeedFields,
 		],
 	};
 }
