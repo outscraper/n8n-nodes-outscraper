@@ -34,7 +34,7 @@ To install the node manually:
 1. Open your n8n installation folder
 2. Go to the `node_modules` folder
 3. Create a new folder called `n8n-nodes-outscraper`
-4. Download the [latest release](https://github.com/outscraper/outscraper-n8n/releases) and extract it into the folder
+4. Download the [latest release](https://github.com/outscraper/n8n-nodes-outscraper/releases) and extract it into the folder
 5. Restart n8n
 
 ### npm Installation
@@ -90,6 +90,24 @@ To use this node, you need an Outscraper API key.
 * [n8n Community Nodes Documentation](https://docs.n8n.io/integrations/community-nodes/)
 
 ## Version History
+## 0.1.4 (2025-06-26)
+
+* Enhanced field configurations with additional parameters
+
+### 0.1.3 (2025-06-26)
+
+* Improved routing and display options
+
+### 0.1.2 (2025-06-26)
+
+* Refactored node structure for better maintainability
+* Updated field configurations with improved descriptions
+* Enhanced error handling and validation
+
+### 0.1.1 (2025-06-25)
+
+* Fixed minor bugs and improved stability
+* Updated dependencies and documentation
 
 ### 0.1.0 (2025-06-25)
 
