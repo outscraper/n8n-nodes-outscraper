@@ -234,24 +234,6 @@ export const productHuntFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'UI',
-		name: 'ui',
-		type: 'boolean',
-		default: false,
-		displayOptions: {
-			show: {
-				resource: ['productHunt'],
-			},
-		},
-		description: 'Whether to execute the request as a UI task',
-		routing: {
-			send: {
-				type: 'query',
-				property: 'ui',
-			},
-		},
-	},
-	{
 		displayName: 'Webhook',
 		name: 'webhook',
 		type: 'string',
@@ -292,6 +274,19 @@ export const productHuntFields: INodeProperties[] = [
 					send: {
 						type: 'query',
 						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
 					},
 				},
 			},

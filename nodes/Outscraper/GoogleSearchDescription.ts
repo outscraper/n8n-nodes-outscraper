@@ -163,6 +163,26 @@ export const googleSearchFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['googleSearch'],
+				operation: ['search', 'searchNews', 'searchEvents', 'searchVideos', 'searchImages', 'searchShopping', 'searchCareers'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
 		displayName: 'Language',
 		name: 'language',
 		type: 'string',

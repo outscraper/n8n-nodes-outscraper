@@ -155,25 +155,6 @@ export const g2ReviewsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'UI',
-		name: 'ui',
-		type: 'boolean',
-		default: false,
-		displayOptions: {
-			show: {
-				resource: ['g2Reviews'],
-				operation: ['reviews'],
-			},
-		},
-		description: 'Whether to execute the request as a UI task',
-		routing: {
-			send: {
-				type: 'query',
-				property: 'ui',
-			},
-		},
-	},
-	{
 		displayName: 'Webhook',
 		name: 'webhook',
 		type: 'string',
@@ -216,6 +197,19 @@ export const g2ReviewsFields: INodeProperties[] = [
 					send: {
 						type: 'query',
 						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
 					},
 				},
 			},

@@ -65,19 +65,6 @@ export const youtubeSearchFields: INodeProperties[] = [
 		description: 'Whether to execute the request asynchronously',
 	},
 	{
-		displayName: 'UI',
-		name: 'ui',
-		type: 'boolean',
-		displayOptions: {
-			show: {
-				resource: ['youtube'],
-				operation: ['search'],
-			},
-		},
-		default: false,
-		description: 'Whether to execute the request as a UI task',
-	},
-	{
 		displayName: 'Webhook',
 		name: 'webhook',
 		type: 'string',
@@ -129,6 +116,13 @@ export const youtubeSearchFields: INodeProperties[] = [
 				description: 'Fields to include in the response (comma-separated)',
 				placeholder: 'e.g., query,video_id,video_title',
 			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+			},
 		],
 	},
 ];
@@ -161,19 +155,6 @@ export const youtubeChannelFields: INodeProperties[] = [
 		},
 		default: false,
 		description: 'Whether to execute the request asynchronously',
-	},
-	{
-		displayName: 'UI',
-		name: 'ui',
-		type: 'boolean',
-		displayOptions: {
-			show: {
-				resource: ['youtube'],
-				operation: ['channel'],
-			},
-		},
-		default: false,
-		description: 'Whether to execute the request as a UI task',
 	},
 	{
 		displayName: 'Webhook',
@@ -210,6 +191,13 @@ export const youtubeChannelFields: INodeProperties[] = [
 				description: 'Fields to include in the response (comma-separated)',
 				placeholder: 'e.g., title,description,channel_id',
 			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+			},
 		],
 	},
 ];
@@ -242,19 +230,6 @@ export const youtubeCommentsFields: INodeProperties[] = [
 		},
 		default: false,
 		description: 'Whether to execute the request asynchronously',
-	},
-	{
-		displayName: 'UI',
-		name: 'ui',
-		type: 'boolean',
-		displayOptions: {
-			show: {
-				resource: ['youtube'],
-				operation: ['comments'],
-			},
-		},
-		default: false,
-		description: 'Whether to execute the request as a UI task',
 	},
 	{
 		displayName: 'Webhook',
@@ -320,6 +295,13 @@ export const youtubeCommentsFields: INodeProperties[] = [
 				default: 'US',
 				description: 'The region to use for the request',
 				placeholder: 'e.g., US',
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
 			},
 		],
 	},

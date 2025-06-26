@@ -116,24 +116,6 @@ export const yelpFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'UI',
-		name: 'ui',
-		type: 'boolean',
-		default: false,
-		displayOptions: {
-			show: {
-				resource: ['yelp'],
-			},
-		},
-		description: 'Whether to execute the request as a UI task',
-		routing: {
-			send: {
-				type: 'query',
-				property: 'ui',
-			},
-		},
-	},
-	{
 		displayName: 'Webhook',
 		name: 'webhook',
 		type: 'string',
@@ -277,6 +259,19 @@ export const yelpFields: INodeProperties[] = [
 					send: {
 						type: 'query',
 						property: 'enrichment',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
 					},
 				},
 			},

@@ -136,6 +136,26 @@ export const googleMapsSearchFields: INodeProperties[] = [
 			},
 		},
 	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['googleMaps'],
+				operation: ['search'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
 ];
 
 // Google Maps Reviews fields
@@ -246,6 +266,26 @@ export const googleMapsReviewsFields: INodeProperties[] = [
 			},
 		},
 	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['googleMaps'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
 ];
 
 // Google Maps Photos fields
@@ -324,6 +364,26 @@ export const googleMapsPhotosFields: INodeProperties[] = [
 			send: {
 				type: 'query',
 				property: 'language',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['googleMaps'],
+				operation: ['photos'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
 			},
 		},
 	},

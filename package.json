@@ -1,10 +1,16 @@
 {
   "name": "n8n-nodes-outscraper",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "n8n node to integrate with Outscraper API",
   "keywords": [
     "n8n-community-node-package",
-    "outscraper"
+    "outscraper",
+    "google maps",
+    "google places",
+    "google reviews",
+    "google maps",
+    "google places",
+    "google reviews"
   ],
   "license": "MIT",
   "homepage": "https://outscraper.com",
@@ -14,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/outscraper/ouscraper-n8n.git"
+    "url": "https://github.com/outscraper/n8n-nodes-outscraper.git"
   },
   "engines": {
     "node": ">=20.15"

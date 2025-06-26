@@ -220,24 +220,6 @@ export const trustpilotFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'UI',
-		name: 'ui',
-		type: 'boolean',
-		default: false,
-		displayOptions: {
-			show: {
-				resource: ['trustpilot'],
-			},
-		},
-		description: 'Whether to execute the request as a UI task',
-		routing: {
-			send: {
-				type: 'query',
-				property: 'ui',
-			},
-		},
-	},
-	{
 		displayName: 'Webhook',
 		name: 'webhook',
 		type: 'string',
@@ -291,6 +273,19 @@ export const trustpilotFields: INodeProperties[] = [
 					send: {
 						type: 'query',
 						property: 'enrichment',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
 					},
 				},
 			},
