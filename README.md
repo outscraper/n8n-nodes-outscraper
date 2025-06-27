@@ -1,6 +1,6 @@
 # n8n-nodes-outscraper
 
-![Outscraper Logo](https://outscraper.com/static/images/logo.svg)
+![Outscraper Logo](https://outscraper.com/wp-content/uploads/2023/11/cropped-logo-long-e1628850886215.webp)
 
 This is an n8n community node for integrating with the [Outscraper API](https://outscraper.com). It allows you to automate data extraction from various online platforms including Google Maps, Google Search, YouTube, Trustpilot, TripAdvisor, Expedia, and G2 Reviews.
 
@@ -90,7 +90,13 @@ To use this node, you need an Outscraper API key.
 * [n8n Community Nodes Documentation](https://docs.n8n.io/integrations/community-nodes/)
 
 ## Version History
-## 0.1.4 (2025-06-26)
+
+### 0.1.5
+* Added support for geocoding operations (Geocode and Reverse Geocode)
+* Enhanced operations with prices functionality
+* Improved field configurations and routing options
+
+### 0.1.4 (2025-06-26)
 
 * Enhanced field configurations with additional parameters
 

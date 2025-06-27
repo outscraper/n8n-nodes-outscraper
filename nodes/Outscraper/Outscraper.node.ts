@@ -75,15 +75,37 @@ import {
 import {
 	geocodingOperations,
 	geocodingFields,
-	reverseGeocodingOperations,
-	reverseGeocodingFields,
 	companyInsightsOperations,
 	companyInsightsFields,
 	universalScraperOperations,
 	universalScraperFields,
 	webPageScreenshoterOperations,
 	webPageScreenshoterFields,
+	walmartReviewsOperations,
+	walmartReviewsFields,
+	targetReviewsOperations,
+	targetReviewsFields,
+	twitterProfilesOperations,
+	twitterProfilesFields,
+	tiktokProfilesOperations,
+	tiktokProfilesFields,
+	getAppReviewsOperations,
+	getAppReviewsFields,
+	yellowPagesSearchOperations,
+	yellowPagesSearchFields,
+	phoneIdentityFinderOperations,
+	phoneIdentityFinderFields,
+	whitepagesAddressesOperations,
+	whitepagesAddressesFields,
+	phonesOwnersOperations,
+	phonesOwnersFields,
 } from './OthersDescription';
+
+import {
+	airbnbOperations,
+	airbnbSearchFields,
+	airbnbReviewsFields,
+} from './AirbnbDescription';
 
 export class Outscraper implements INodeType {
 	description: INodeTypeDescription = {
@@ -125,6 +147,10 @@ export class Outscraper implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
+						name: 'Airbnb',
+						value: 'airbnb',
+					},
+					{
 						name: 'AppStore',
 						value: 'appStore',
 					},
@@ -149,6 +175,10 @@ export class Outscraper implements INodeType {
 						value: 'geocoding',
 					},
 					{
+						name: 'GetApp Review',
+						value: 'getAppReviews',
+					},
+					{
 						name: 'Google Map',
 						value: 'googleMaps',
 					},
@@ -161,12 +191,24 @@ export class Outscraper implements INodeType {
 						value: 'indeed',
 					},
 					{
+						name: 'Phone Identity Finder',
+						value: 'phoneIdentityFinder',
+					},
+					{
+						name: 'Phones Owner',
+						value: 'phonesOwners',
+					},
+					{
 						name: 'Product Hunt',
 						value: 'productHunt',
 					},
 					{
-						name: 'Reverse Geocoding',
-						value: 'reverseGeocoding',
+						name: 'Target Review',
+						value: 'targetReviews',
+					},
+					{
+						name: 'TikTok Profile',
+						value: 'tiktokProfiles',
 					},
 					{
 						name: 'TripAdvisor',
@@ -177,12 +219,28 @@ export class Outscraper implements INodeType {
 						value: 'trustpilot',
 					},
 					{
-						name: 'Universal Scraper',
+						name: 'Twitter Profile',
+						value: 'twitterProfiles',
+					},
+					{
+						name: 'Universal AI Scraper',
 						value: 'universalScraper',
+					},
+					{
+						name: 'Walmart Review',
+						value: 'walmartReviews',
 					},
 					{
 						name: 'WebPage Screenshoter',
 						value: 'webPageScreenshoter',
+					},
+					{
+						name: 'Whitepages Addresses Scraper',
+						value: 'whitepagesAddresses',
+					},
+					{
+						name: 'Yellow Pages Search',
+						value: 'yellowPagesSearch',
 					},
 					{
 						name: 'Yelp',
@@ -263,10 +321,6 @@ export class Outscraper implements INodeType {
 			...geocodingOperations,
 			...geocodingFields,
 
-			// Reverse Geocoding operations
-			...reverseGeocodingOperations,
-			...reverseGeocodingFields,
-
 			// Company Insights operations
 			...companyInsightsOperations,
 			...companyInsightsFields,
@@ -278,6 +332,47 @@ export class Outscraper implements INodeType {
 			// WebPage Screenshoter operations
 			...webPageScreenshoterOperations,
 			...webPageScreenshoterFields,
+
+			// Airbnb operations
+			...airbnbOperations,
+			...airbnbSearchFields,
+			...airbnbReviewsFields,
+
+			// Walmart Reviews operations
+			...walmartReviewsOperations,
+			...walmartReviewsFields,
+
+			// Target Reviews operations
+			...targetReviewsOperations,
+			...targetReviewsFields,
+
+			// Twitter Profiles operations
+			...twitterProfilesOperations,
+			...twitterProfilesFields,
+
+			// TikTok Profiles operations
+			...tiktokProfilesOperations,
+			...tiktokProfilesFields,
+
+			// GetApp Reviews operations
+			...getAppReviewsOperations,
+			...getAppReviewsFields,
+
+			// Yellow Pages Search operations
+			...yellowPagesSearchOperations,
+			...yellowPagesSearchFields,
+
+			// Phone Identity Finder operations
+			...phoneIdentityFinderOperations,
+			...phoneIdentityFinderFields,
+
+			// Whitepages Addresses Scraper operations
+			...whitepagesAddressesOperations,
+			...whitepagesAddressesFields,
+
+			// Phones Owners operations
+			...phonesOwnersOperations,
+			...phonesOwnersFields,
 		],
 	};
 }

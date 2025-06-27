@@ -1,6 +1,6 @@
 import { INodeProperties } from 'n8n-workflow';
 
-// Geocoding operation
+// Geocoding operations (merged Geocode and Reverse Geocode)
 export const geocodingOperations: INodeProperties[] = [
 	{
 		displayName: 'Operation',
@@ -22,6 +22,18 @@ export const geocodingOperations: INodeProperties[] = [
 					request: {
 						method: 'GET',
 						url: '/geocoding',
+					},
+				},
+			},
+			{
+				name: 'Reverse Geocode',
+				value: 'reverseGeocode',
+				description: 'Translate locations on the map into human-readable addresses',
+				action: 'Reverse geocode coordinates',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/reverse-geocoding',
 					},
 				},
 			},
@@ -51,39 +63,6 @@ export const geocodingFields: INodeProperties[] = [
 			},
 		},
 	},
-];
-
-// Reverse Geocoding operation
-export const reverseGeocodingOperations: INodeProperties[] = [
-	{
-		displayName: 'Operation',
-		name: 'operation',
-		type: 'options',
-		noDataExpression: true,
-		displayOptions: {
-			show: {
-				resource: ['reverseGeocoding'],
-			},
-		},
-		options: [
-			{
-				name: 'Reverse Geocode',
-				value: 'reverseGeocode',
-				description: 'Translate locations on the map into human-readable addresses',
-				action: 'Reverse geocode coordinates',
-				routing: {
-					request: {
-						method: 'GET',
-						url: '/reverse-geocoding',
-					},
-				},
-			},
-		],
-		default: 'reverseGeocode',
-	},
-];
-
-export const reverseGeocodingFields: INodeProperties[] = [
 	{
 		displayName: 'Query',
 		name: 'query',
@@ -92,7 +71,7 @@ export const reverseGeocodingFields: INodeProperties[] = [
 		required: true,
 		displayOptions: {
 			show: {
-				resource: ['reverseGeocoding'],
+				resource: ['geocoding'],
 				operation: ['reverseGeocode'],
 			},
 		},
@@ -666,4 +645,1485 @@ export const webPageScreenshoterFields: INodeProperties[] = [
 	},
 ];
 
-// Add Geocoding, Reverse Geocoding, Company Insights, Universal Scraper, and WebPage Screenshoter operations and fields, following the conventions of other services.
+// Walmart Reviews
+export const walmartReviewsOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['walmartReviews'],
+			},
+		},
+		options: [
+			{
+				name: 'Reviews',
+				value: 'reviews',
+				description: 'Returns reviews from a list of Walmart products',
+				action: 'Get reviews from walmart',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/walmart/reviews',
+					},
+				},
+			},
+		],
+		default: 'reviews',
+	},
+];
+
+export const walmartReviewsFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['walmartReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'Links to Walmart products (e.g., https://www.walmart.com/ip/...)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		displayOptions: {
+			show: {
+				resource: ['walmartReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'Max number of results to return',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'limit',
+			},
+		},
+	},
+	{
+		displayName: 'Sort',
+		name: 'sort',
+		type: 'options',
+		default: 'helpful',
+		options: [
+			{ name: 'Helpful', value: 'helpful' },
+			{ name: 'Rating Ascending', value: 'rating-asc' },
+			{ name: 'Rating Descending', value: 'rating-desc' },
+			{ name: 'Relevancy', value: 'relevancy' },
+			{ name: 'Submission Ascending', value: 'submission-asc' },
+			{ name: 'Submission Descending', value: 'submission-desc' },
+		],
+		displayOptions: {
+			show: {
+				resource: ['walmartReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'Sort order for reviews',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'sort',
+			},
+		},
+	},
+	{
+		displayName: 'Cutoff',
+		name: 'cutoff',
+		type: 'number',
+		default: 0,
+		displayOptions: {
+			show: {
+				resource: ['walmartReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'Oldest timestamp value for items (overrides sort to newest first)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'cutoff',
+			},
+		},
+	},
+	{
+		displayName: 'Async Request',
+		name: 'async',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['walmartReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'Whether to make an asynchronous request',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'async',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['walmartReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['walmartReviews'],
+				operation: ['reviews'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Fields',
+				name: 'fields',
+				type: 'string',
+				default: '',
+				description: 'Specific fields to return (comma-separated)',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
+					},
+				},
+			},
+		],
+	},
+];
+
+// Target Reviews
+export const targetReviewsOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['targetReviews'],
+			},
+		},
+		options: [
+			{
+				name: 'Reviews',
+				value: 'reviews',
+				description: 'Returns reviews from a list of Target products',
+				action: 'Get reviews from target',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/target/reviews',
+					},
+				},
+			},
+		],
+		default: 'reviews',
+	},
+];
+
+export const targetReviewsFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['targetReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'Links to Target products (e.g., https://www.target.com/p/...)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		displayOptions: {
+			show: {
+				resource: ['targetReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'Max number of results to return',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'limit',
+			},
+		},
+	},
+	{
+		displayName: 'Sort',
+		name: 'sort',
+		type: 'options',
+		default: 'most_recent',
+		options: [
+			{ name: 'Most Recent', value: 'most_recent' },
+			{ name: 'Highest Rating', value: 'highest_rating' },
+			{ name: 'Lowest Rating', value: 'lowest_rating' },
+			{ name: 'Helpfulness Descending', value: 'helpfulness_desc' },
+		],
+		displayOptions: {
+			show: {
+				resource: ['targetReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'Sort order for reviews',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'sort',
+			},
+		},
+	},
+	{
+		displayName: 'Cutoff',
+		name: 'cutoff',
+		type: 'number',
+		default: 0,
+		displayOptions: {
+			show: {
+				resource: ['targetReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'Oldest timestamp value for items (overrides sort to newest first)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'cutoff',
+			},
+		},
+	},
+	{
+		displayName: 'Async Request',
+		name: 'async',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['targetReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'Whether to make an asynchronous request',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'async',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['targetReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['targetReviews'],
+				operation: ['reviews'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Fields',
+				name: 'fields',
+				type: 'string',
+				default: '',
+				description: 'Specific fields to return (comma-separated)',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
+					},
+				},
+			},
+		],
+	},
+];
+
+// Twitter Profiles
+export const twitterProfilesOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['twitterProfiles'],
+			},
+		},
+		options: [
+			{
+				name: 'Profiles',
+				value: 'profiles',
+				description: 'Returns information from the list of Twitter profiles',
+				action: 'Get twitter profiles',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/twitter/profiles',
+					},
+				},
+			},
+		],
+		default: 'profiles',
+	},
+];
+
+export const twitterProfilesFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['twitterProfiles'],
+				operation: ['profiles'],
+			},
+		},
+		description: 'Links to Twitter pages or usernames (e.g., https://www.twitter.com/outscraper, outscraper)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Async Request',
+		name: 'async',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['twitterProfiles'],
+				operation: ['profiles'],
+			},
+		},
+		description: 'Whether to make an asynchronous request',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'async',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['twitterProfiles'],
+				operation: ['profiles'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['twitterProfiles'],
+				operation: ['profiles'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Fields',
+				name: 'fields',
+				type: 'string',
+				default: '',
+				description: 'Specific fields to return (comma-separated)',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
+					},
+				},
+			},
+		],
+	},
+];
+
+// TikTok Profiles
+export const tiktokProfilesOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['tiktokProfiles'],
+			},
+		},
+		options: [
+			{
+				name: 'Profiles',
+				value: 'profiles',
+				description: 'Returns information from the list of TikTok profiles',
+				action: 'Get tik tok profiles',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/tiktok/profiles',
+					},
+				},
+			},
+		],
+		default: 'profiles',
+	},
+];
+
+export const tiktokProfilesFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['tiktokProfiles'],
+				operation: ['profiles'],
+			},
+		},
+		description: 'Links to TikTok pages or usernames (e.g., https://www.tiktok.com/@outscraper, outscraper)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Async Request',
+		name: 'async',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['tiktokProfiles'],
+				operation: ['profiles'],
+			},
+		},
+		description: 'Whether to make an asynchronous request',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'async',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['tiktokProfiles'],
+				operation: ['profiles'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['tiktokProfiles'],
+				operation: ['profiles'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Fields',
+				name: 'fields',
+				type: 'string',
+				default: '',
+				description: 'Specific fields to return (comma-separated)',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
+					},
+				},
+			},
+		],
+	},
+];
+
+// GetApp Reviews
+export const getAppReviewsOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['getAppReviews'],
+			},
+		},
+		options: [
+			{
+				name: 'Reviews',
+				value: 'reviews',
+				description: 'Returns reviews from GetApp apps',
+				action: 'Get reviews from get app',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/getapp/reviews',
+					},
+				},
+			},
+		],
+		default: 'reviews',
+	},
+];
+
+export const getAppReviewsFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['getAppReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'Direct links to any GetApp app (e.g., https://www.getapp.com/customer-management-software/a/salesforce/reviews/)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		displayOptions: {
+			show: {
+				resource: ['getAppReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'Max number of results to return',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'limit',
+			},
+		},
+	},
+	{
+		displayName: 'Sort',
+		name: 'sort',
+		type: 'options',
+		default: 'recommended',
+		options: [
+			{ name: 'Highest Rated', value: 'highest_rated' },
+			{ name: 'Least Recent', value: 'least_recent' },
+			{ name: 'Lowest Rated', value: 'lowest_rated' },
+			{ name: 'Most Recent', value: 'most_recent' },
+			{ name: 'Recommended', value: 'recommended' },
+		],
+		displayOptions: {
+			show: {
+				resource: ['getAppReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'Sort order for reviews',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'sort',
+			},
+		},
+	},
+	{
+		displayName: 'Cutoff',
+		name: 'cutoff',
+		type: 'number',
+		default: 0,
+		displayOptions: {
+			show: {
+				resource: ['getAppReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'Oldest timestamp value for items (overrides sort to newest first)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'cutoff',
+			},
+		},
+	},
+	{
+		displayName: 'Async Request',
+		name: 'async',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['getAppReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'Whether to make an asynchronous request',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'async',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['getAppReviews'],
+				operation: ['reviews'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['getAppReviews'],
+				operation: ['reviews'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Fields',
+				name: 'fields',
+				type: 'string',
+				default: '',
+				description: 'Specific fields to return (comma-separated)',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
+					},
+				},
+			},
+		],
+	},
+];
+
+// Yellow Pages Search
+export const yellowPagesSearchOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['yellowPagesSearch'],
+			},
+		},
+		options: [
+			{
+				name: 'Search',
+				value: 'search',
+				description: 'Returns search results from Yellow Pages',
+				action: 'Search yellow pages',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/yellowpages/search',
+					},
+				},
+			},
+		],
+		default: 'search',
+	},
+];
+
+export const yellowPagesSearchFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['yellowPagesSearch'],
+				operation: ['search'],
+			},
+		},
+		description: 'Categories to search for (e.g., bars, restaurants, dentists)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Location',
+		name: 'location',
+		type: 'string',
+		default: 'New York, NY',
+		displayOptions: {
+			show: {
+				resource: ['yellowPagesSearch'],
+				operation: ['search'],
+			},
+		},
+		description: 'Where to search (e.g., New York, NY)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'location',
+			},
+		},
+	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		displayOptions: {
+			show: {
+				resource: ['yellowPagesSearch'],
+				operation: ['search'],
+			},
+		},
+		description: 'Max number of results to return',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'limit',
+			},
+		},
+	},
+	{
+		displayName: 'Region',
+		name: 'region',
+		type: 'options',
+		default: 'US',
+		options: [
+			{ name: 'United States', value: 'US' },
+			{ name: 'United Kingdom', value: 'GB' },
+			{ name: 'Canada', value: 'CA' },
+			// ... (add all region codes as needed)
+		],
+		displayOptions: {
+			show: {
+				resource: ['yellowPagesSearch'],
+				operation: ['search'],
+			},
+		},
+		description: 'Country to use for website',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'region',
+			},
+		},
+	},
+	{
+		displayName: 'Enrichment',
+		name: 'enrichment',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['yellowPagesSearch'],
+				operation: ['search'],
+			},
+		},
+		description: 'Enrichments to apply to the results (comma-separated)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'enrichment',
+			},
+		},
+	},
+	{
+		displayName: 'Async Request',
+		name: 'async',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['yellowPagesSearch'],
+				operation: ['search'],
+			},
+		},
+		description: 'Whether to make an asynchronous request',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'async',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['yellowPagesSearch'],
+				operation: ['search'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['yellowPagesSearch'],
+				operation: ['search'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Fields',
+				name: 'fields',
+				type: 'string',
+				default: '',
+				description: 'Specific fields to return (comma-separated)',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
+					},
+				},
+			},
+		],
+	},
+];
+
+// Phone Identity Finder (Whitepages)
+export const phoneIdentityFinderOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['phoneIdentityFinder'],
+			},
+		},
+		options: [
+			{
+				name: 'Find Identity',
+				value: 'findIdentity',
+				description: 'Returns insights about phone number owners (name, address, etc.)',
+				action: 'Find phone identity',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/whitepages/phones',
+					},
+				},
+			},
+		],
+		default: 'findIdentity',
+	},
+];
+
+export const phoneIdentityFinderFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['phoneIdentityFinder'],
+				operation: ['findIdentity'],
+			},
+		},
+		description: 'Phone number (e.g., +1 281 236 8208)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Async Request',
+		name: 'async',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['phoneIdentityFinder'],
+				operation: ['findIdentity'],
+			},
+		},
+		description: 'Whether to make an asynchronous request',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'async',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['phoneIdentityFinder'],
+				operation: ['findIdentity'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['phoneIdentityFinder'],
+				operation: ['findIdentity'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Fields',
+				name: 'fields',
+				type: 'string',
+				default: '',
+				description: 'Specific fields to return (comma-separated)',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
+					},
+				},
+			},
+		],
+	},
+];
+
+// Whitepages Addresses Scraper
+export const whitepagesAddressesOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['whitepagesAddresses'],
+			},
+		},
+		options: [
+			{
+				name: 'Scrape Addresses',
+				value: 'scrapeAddresses',
+				description: 'Returns insights about addresses and their residents',
+				action: 'Scrape whitepages addresses',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/whitepages/addresses',
+					},
+				},
+			},
+		],
+		default: 'scrapeAddresses',
+	},
+];
+
+export const whitepagesAddressesFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['whitepagesAddresses'],
+				operation: ['scrapeAddresses'],
+			},
+		},
+		description: 'Addresses (e.g., 321 California Ave, Palo Alto, CA 94306)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Async Request',
+		name: 'async',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['whitepagesAddresses'],
+				operation: ['scrapeAddresses'],
+			},
+		},
+		description: 'Whether to make an asynchronous request',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'async',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['whitepagesAddresses'],
+				operation: ['scrapeAddresses'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['whitepagesAddresses'],
+				operation: ['scrapeAddresses'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Fields',
+				name: 'fields',
+				type: 'string',
+				default: '',
+				description: 'Specific fields to return (comma-separated)',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
+					},
+				},
+			},
+		],
+	},
+];
+
+// Phones Owners
+export const phonesOwnersOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['phonesOwners'],
+			},
+		},
+		options: [
+			{
+				name: 'Get Owners',
+				value: 'getOwners',
+				description: 'Returns insights about phone number owners (name, address, etc.)',
+				action: 'Get phone owners',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/phones/owners',
+					},
+				},
+			},
+		],
+		default: 'getOwners',
+	},
+];
+
+export const phonesOwnersFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['phonesOwners'],
+				operation: ['getOwners'],
+			},
+		},
+		description: 'Phone number (e.g., +1 281 236 8208)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Async Request',
+		name: 'async',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['phonesOwners'],
+				operation: ['getOwners'],
+			},
+		},
+		description: 'Whether to make an asynchronous request',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'async',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['phonesOwners'],
+				operation: ['getOwners'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['phonesOwners'],
+				operation: ['getOwners'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Fields',
+				name: 'fields',
+				type: 'string',
+				default: '',
+				description: 'Specific fields to return (comma-separated)',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
+					},
+				},
+			},
+		],
+	},
+];
