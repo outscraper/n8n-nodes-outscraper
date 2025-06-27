@@ -3,7 +3,7 @@ import { INodeType, INodeTypeDescription, NodeConnectionType } from 'n8n-workflo
 import {
 	g2ReviewsOperations,
 	g2ReviewsFields,
-} from './OthersDescription';
+} from './G2Description';
 
 import {
 	googleMapsSearchOperations,
@@ -55,6 +55,36 @@ import {
 	indeedFields,
 } from './IndeedDescription';
 
+import {
+	bookingOperations,
+	bookingSearchFields,
+	bookingReviewsFields,
+	bookingPricesFields,
+} from './BookingDescription';
+
+import {
+	zillowOperations,
+	zillowSearchFields,
+} from './ZillowDescription';
+
+import {
+	appStoreOperations,
+	appStoreReviewsFields,
+} from './AppStoreDescription';
+
+import {
+	geocodingOperations,
+	geocodingFields,
+	reverseGeocodingOperations,
+	reverseGeocodingFields,
+	companyInsightsOperations,
+	companyInsightsFields,
+	universalScraperOperations,
+	universalScraperFields,
+	webPageScreenshoterOperations,
+	webPageScreenshoterFields,
+} from './OthersDescription';
+
 export class Outscraper implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Outscraper',
@@ -95,12 +125,28 @@ export class Outscraper implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
+						name: 'AppStore',
+						value: 'appStore',
+					},
+					{
+						name: 'Booking',
+						value: 'booking',
+					},
+					{
+						name: 'Company Insight',
+						value: 'companyInsights',
+					},
+					{
 						name: 'Expedia',
 						value: 'expedia',
 					},
 					{
 						name: 'G2 Review',
 						value: 'g2Reviews',
+					},
+					{
+						name: 'Geocoding',
+						value: 'geocoding',
 					},
 					{
 						name: 'Google Map',
@@ -119,6 +165,10 @@ export class Outscraper implements INodeType {
 						value: 'productHunt',
 					},
 					{
+						name: 'Reverse Geocoding',
+						value: 'reverseGeocoding',
+					},
+					{
 						name: 'TripAdvisor',
 						value: 'tripadvisor',
 					},
@@ -127,12 +177,24 @@ export class Outscraper implements INodeType {
 						value: 'trustpilot',
 					},
 					{
+						name: 'Universal Scraper',
+						value: 'universalScraper',
+					},
+					{
+						name: 'WebPage Screenshoter',
+						value: 'webPageScreenshoter',
+					},
+					{
 						name: 'Yelp',
 						value: 'yelp',
 					},
 					{
 						name: 'YouTube',
 						value: 'youtube',
+					},
+					{
+						name: 'Zillow',
+						value: 'zillow',
 					},
 				],
 				default: 'googleMaps',
@@ -182,6 +244,40 @@ export class Outscraper implements INodeType {
 			// Indeed operations
 			...indeedOperations,
 			...indeedFields,
+
+			// Booking.com operations
+			...bookingOperations,
+			...bookingSearchFields,
+			...bookingReviewsFields,
+			...bookingPricesFields,
+
+			// Zillow operations
+			...zillowOperations,
+			...zillowSearchFields,
+
+			// AppStore operations
+			...appStoreOperations,
+			...appStoreReviewsFields,
+
+			// Geocoding operations
+			...geocodingOperations,
+			...geocodingFields,
+
+			// Reverse Geocoding operations
+			...reverseGeocodingOperations,
+			...reverseGeocodingFields,
+
+			// Company Insights operations
+			...companyInsightsOperations,
+			...companyInsightsFields,
+
+			// Universal Scraper operations
+			...universalScraperOperations,
+			...universalScraperFields,
+
+			// WebPage Screenshoter operations
+			...webPageScreenshoterOperations,
+			...webPageScreenshoterFields,
 		],
 	};
 }

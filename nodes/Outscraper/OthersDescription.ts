@@ -1,8 +1,7 @@
 import { INodeProperties } from 'n8n-workflow';
 
-
-// G2 Reviews operation
-export const g2ReviewsOperations: INodeProperties[] = [
+// Geocoding operation
+export const geocodingOperations: INodeProperties[] = [
 	{
 		displayName: 'Operation',
 		name: 'operation',
@@ -10,29 +9,28 @@ export const g2ReviewsOperations: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
-				resource: ['g2Reviews'],
+				resource: ['geocoding'],
 			},
 		},
 		options: [
 			{
-				name: 'Get Reviews',
-				value: 'reviews',
-				description: 'Get reviews from G2',
-				action: 'Get reviews from G2',
+				name: 'Geocode',
+				value: 'geocode',
+				description: 'Translates human-readable addresses into locations on the map',
+				action: 'Geocode address',
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/g2/reviews',
+						url: '/geocoding',
 					},
 				},
 			},
 		],
-		default: 'reviews',
+		default: 'geocode',
 	},
 ];
 
-// G2 Reviews fields
-export const g2ReviewsFields: INodeProperties[] = [
+export const geocodingFields: INodeProperties[] = [
 	{
 		displayName: 'Query',
 		name: 'query',
@@ -41,11 +39,117 @@ export const g2ReviewsFields: INodeProperties[] = [
 		required: true,
 		displayOptions: {
 			show: {
-				resource: ['g2Reviews'],
-				operation: ['reviews'],
+				resource: ['geocoding'],
+				operation: ['geocode'],
 			},
 		},
-		description: 'Links to G2 products (e.g., https://www.g2.com/products/outscraper)',
+		description: 'Addresses specifying the location (e.g., 321 California Ave, Palo Alto, CA 94306)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+];
+
+// Reverse Geocoding operation
+export const reverseGeocodingOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['reverseGeocoding'],
+			},
+		},
+		options: [
+			{
+				name: 'Reverse Geocode',
+				value: 'reverseGeocode',
+				description: 'Translate locations on the map into human-readable addresses',
+				action: 'Reverse geocode coordinates',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/reverse-geocoding',
+					},
+				},
+			},
+		],
+		default: 'reverseGeocode',
+	},
+];
+
+export const reverseGeocodingFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['reverseGeocoding'],
+				operation: ['reverseGeocode'],
+			},
+		},
+		description: 'Latitude and longitude coordinates (e.g., 40.7624284 -73.973794)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+];
+
+// Company Insights operation
+export const companyInsightsOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['companyInsights'],
+			},
+		},
+		options: [
+			{
+				name: 'Get Insights',
+				value: 'getInsights',
+				description: 'Finds company details such as revenue, size, founding year, public status, etc',
+				action: 'Get company insights',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/company-insights',
+					},
+				},
+			},
+		],
+		default: 'getInsights',
+	},
+];
+
+export const companyInsightsFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['companyInsights'],
+				operation: ['getInsights'],
+			},
+		},
+		description: 'Domains or websites (e.g., dominopark.com, https://www.esbnyc.com/)',
 		routing: {
 			send: {
 				type: 'query',
@@ -54,84 +158,21 @@ export const g2ReviewsFields: INodeProperties[] = [
 		},
 	},
 	{
-		displayName: 'Limit',
-		name: 'limit',
-		type: 'number',
-		typeOptions: {
-			minValue: 1,
-		},
-		default: 50,
+		displayName: 'Enrichment',
+		name: 'enrichment',
+		type: 'string',
+		default: '',
 		displayOptions: {
 			show: {
-				resource: ['g2Reviews'],
-				operation: ['reviews'],
+				resource: ['companyInsights'],
+				operation: ['getInsights'],
 			},
 		},
-		description: 'Max number of results to return',
+		description: 'Enrichments to apply (comma-separated)',
 		routing: {
 			send: {
 				type: 'query',
-				property: 'limit',
-			},
-		},
-	},
-	{
-		displayName: 'Sort',
-		name: 'sort',
-		type: 'options',
-		default: 'g2_default',
-		displayOptions: {
-			show: {
-				resource: ['g2Reviews'],
-				operation: ['reviews'],
-			},
-		},
-		options: [
-			{
-				name: 'G2 Default',
-				value: 'g2_default',
-			},
-			{
-				name: 'Highest Rated',
-				value: 'highest_rated',
-			},
-			{
-				name: 'Lowest Rated',
-				value: 'lowest_rated',
-			},
-			{
-				name: 'Most Helpful',
-				value: 'most_helpful',
-			},
-			{
-				name: 'Most Recent',
-				value: 'most_recent',
-			},
-		],
-		description: 'Sort order for reviews',
-		routing: {
-			send: {
-				type: 'query',
-				property: 'sort',
-			},
-		},
-	},
-	{
-		displayName: 'Cutoff',
-		name: 'cutoff',
-		type: 'number',
-		default: 0,
-		displayOptions: {
-			show: {
-				resource: ['g2Reviews'],
-				operation: ['reviews'],
-			},
-		},
-		description: 'Oldest timestamp value for reviews (overrides sort to newest first)',
-		routing: {
-			send: {
-				type: 'query',
-				property: 'cutoff',
+				property: 'enrichment',
 			},
 		},
 	},
@@ -142,8 +183,8 @@ export const g2ReviewsFields: INodeProperties[] = [
 		default: false,
 		displayOptions: {
 			show: {
-				resource: ['g2Reviews'],
-				operation: ['reviews'],
+				resource: ['companyInsights'],
+				operation: ['getInsights'],
 			},
 		},
 		description: 'Whether to make an asynchronous request',
@@ -161,8 +202,8 @@ export const g2ReviewsFields: INodeProperties[] = [
 		default: '',
 		displayOptions: {
 			show: {
-				resource: ['g2Reviews'],
-				operation: ['reviews'],
+				resource: ['companyInsights'],
+				operation: ['getInsights'],
 			},
 		},
 		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
@@ -182,8 +223,8 @@ export const g2ReviewsFields: INodeProperties[] = [
 		default: {},
 		displayOptions: {
 			show: {
-				resource: ['g2Reviews'],
-				operation: ['reviews'],
+				resource: ['companyInsights'],
+				operation: ['getInsights'],
 			},
 		},
 		options: [
@@ -216,3 +257,413 @@ export const g2ReviewsFields: INodeProperties[] = [
 		],
 	},
 ];
+
+// Universal Scraper operation
+export const universalScraperOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['universalScraper'],
+			},
+		},
+		options: [
+			{
+				name: 'Scrape',
+				value: 'scrape',
+				description: 'Extracts the data you need from any web page by using AI',
+				action: 'Scrape web page',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/universal-scraper',
+					},
+				},
+			},
+		],
+		default: 'scrape',
+	},
+];
+
+export const universalScraperFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['universalScraper'],
+				operation: ['scrape'],
+			},
+		},
+		description: 'Links to web pages (e.g., https://www.apple.com/iphone/)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Attributes',
+		name: 'attributes',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['universalScraper'],
+				operation: ['scrape'],
+			},
+		},
+		description: 'Attributes to parse from a web page (comma-separated)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'attributes',
+			},
+		},
+	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		typeOptions: {
+			minValue: 1,
+		},
+		default: 50,
+		displayOptions: {
+			show: {
+				resource: ['universalScraper'],
+				operation: ['scrape'],
+			},
+		},
+		description: 'Max number of results to return',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'limit',
+			},
+		},
+	},
+	{
+		displayName: 'Async Request',
+		name: 'async',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['universalScraper'],
+				operation: ['scrape'],
+			},
+		},
+		description: 'Whether to make an asynchronous request',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'async',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['universalScraper'],
+				operation: ['scrape'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['universalScraper'],
+				operation: ['scrape'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Fields',
+				name: 'fields',
+				type: 'string',
+				default: '',
+				description: 'Specific fields to return (comma-separated)',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
+					},
+				},
+			},
+		],
+	},
+];
+
+// WebPage Screenshoter operation
+export const webPageScreenshoterOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['webPageScreenshoter'],
+			},
+		},
+		options: [
+			{
+				name: 'Screenshot',
+				value: 'screenshot',
+				description: 'Captures high-quality screenshots of any webpage',
+				action: 'Screenshot web page',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/webpage-screenshoter',
+					},
+				},
+			},
+		],
+		default: 'screenshot',
+	},
+];
+
+export const webPageScreenshoterFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['webPageScreenshoter'],
+				operation: ['screenshot'],
+			},
+		},
+		description: 'Links to web pages (e.g., https://www.apple.com/iphone/)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Region',
+		name: 'region',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['webPageScreenshoter'],
+				operation: ['screenshot'],
+			},
+		},
+		description: 'Country to use for the screenshot',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'region',
+			},
+		},
+	},
+	{
+		displayName: 'Type',
+		name: 'type',
+		type: 'options',
+		default: 'webp',
+		options: [
+			{ name: 'WebP', value: 'webp' },
+			{ name: 'PNG', value: 'png' },
+			{ name: 'JPEG', value: 'jpeg' },
+			{ name: 'PDF', value: 'pdf' },
+		],
+		displayOptions: {
+			show: {
+				resource: ['webPageScreenshoter'],
+				operation: ['screenshot'],
+			},
+		},
+		description: 'Image extension',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'type',
+			},
+		},
+	},
+	{
+		displayName: 'Full Page',
+		name: 'fullPage',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['webPageScreenshoter'],
+				operation: ['screenshot'],
+			},
+		},
+		description: 'Whether to capture the full page',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'fullPage',
+			},
+		},
+	},
+	{
+		displayName: 'Width',
+		name: 'width',
+		type: 'number',
+		default: 1200,
+		displayOptions: {
+			show: {
+				resource: ['webPageScreenshoter'],
+				operation: ['screenshot'],
+			},
+		},
+		description: 'Width of the viewport',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'width',
+			},
+		},
+	},
+	{
+		displayName: 'Height',
+		name: 'height',
+		type: 'number',
+		default: 800,
+		displayOptions: {
+			show: {
+				resource: ['webPageScreenshoter'],
+				operation: ['screenshot'],
+			},
+		},
+		description: 'Height of the viewport',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'height',
+			},
+		},
+	},
+	{
+		displayName: 'Async Request',
+		name: 'async',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['webPageScreenshoter'],
+				operation: ['screenshot'],
+			},
+		},
+		description: 'Whether to make an asynchronous request',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'async',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['webPageScreenshoter'],
+				operation: ['screenshot'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['webPageScreenshoter'],
+				operation: ['screenshot'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Fields',
+				name: 'fields',
+				type: 'string',
+				default: '',
+				description: 'Specific fields to return (comma-separated)',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
+					},
+				},
+			},
+		],
+	},
+];
+
+// Add Geocoding, Reverse Geocoding, Company Insights, Universal Scraper, and WebPage Screenshoter operations and fields, following the conventions of other services.
