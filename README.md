@@ -91,7 +91,7 @@ To use this node, you need an Outscraper API key.
 
 ## Version History
 
-### 0.1.5
+### 0.1.5 (2025-06-27)
 * Added support for geocoding operations (Geocode and Reverse Geocode)
 * Enhanced operations with prices functionality
 * Improved field configurations and routing options
