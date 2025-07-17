@@ -99,6 +99,10 @@ import {
 	whitepagesAddressesFields,
 	phonesOwnersOperations,
 	phonesOwnersFields,
+	similarwebOperations,
+	similarwebFields,
+	companyWebsiteFinderOperations,
+	companyWebsiteFinderFields,
 	emailsAndContactsOperations,
 	emailsAndContactsFields,
 } from './OthersDescription';
@@ -165,6 +169,10 @@ export class Outscraper implements INodeType {
 						value: 'companyInsights',
 					},
 					{
+						name: 'Company Website Finder',
+						value: 'companyWebsiteFinder',
+          },
+          {
 						name: 'Emails & Contact',
 						value: 'emailsAndContacts',
 					},
@@ -207,6 +215,10 @@ export class Outscraper implements INodeType {
 					{
 						name: 'Product Hunt',
 						value: 'productHunt',
+					},
+					{
+						name: 'Similarweb',
+						value: 'similarweb',
 					},
 					{
 						name: 'Target Review',
@@ -379,6 +391,14 @@ export class Outscraper implements INodeType {
 			// Phones Owners operations
 			...phonesOwnersOperations,
 			...phonesOwnersFields,
+
+			// Similarweb operations
+			...similarwebOperations,
+			...similarwebFields,
+
+			// Company Website Finder operations
+			...companyWebsiteFinderOperations,
+			...companyWebsiteFinderFields,
 
 			// Emails & Contacts operations
 			...emailsAndContactsOperations,
