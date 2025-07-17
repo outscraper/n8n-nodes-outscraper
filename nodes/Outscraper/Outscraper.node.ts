@@ -99,6 +99,8 @@ import {
 	whitepagesAddressesFields,
 	phonesOwnersOperations,
 	phonesOwnersFields,
+	emailsAndContactsOperations,
+	emailsAndContactsFields,
 } from './OthersDescription';
 
 import {
@@ -161,6 +163,10 @@ export class Outscraper implements INodeType {
 					{
 						name: 'Company Insight',
 						value: 'companyInsights',
+					},
+					{
+						name: 'Emails & Contact',
+						value: 'emailsAndContacts',
 					},
 					{
 						name: 'Expedia',
@@ -373,6 +379,10 @@ export class Outscraper implements INodeType {
 			// Phones Owners operations
 			...phonesOwnersOperations,
 			...phonesOwnersFields,
+
+			// Emails & Contacts operations
+			...emailsAndContactsOperations,
+			...emailsAndContactsFields,
 		],
 	};
 }

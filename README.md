@@ -91,6 +91,9 @@ To use this node, you need an Outscraper API key.
 
 ## Version History
 
+### 0.1.7 (2025-07-17)
+* Added Emails & Contacts scraper
+
 ### 0.1.6 (2025-07-17)
 * Fixed support for operations
 
