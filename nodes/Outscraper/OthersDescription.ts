@@ -2127,3 +2127,267 @@ export const phonesOwnersFields: INodeProperties[] = [
 		],
 	},
 ];
+
+export const similarwebOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['similarweb'],
+			},
+		},
+		options: [
+			{
+				name: 'Get Data',
+				value: 'getData',
+				description: 'Returns data from Similarweb businesses',
+				action: 'Get similarweb data',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/similarweb',
+					},
+				},
+			},
+		],
+		default: 'getData',
+	},
+];
+
+export const similarwebFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['similarweb'],
+				operation: ['getData'],
+			},
+		},
+		description: 'Domains or websites (e.g., apple.com, https://www.google.com/)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Async Request',
+		name: 'async',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['similarweb'],
+				operation: ['getData'],
+			},
+		},
+		description: 'Whether to make an asynchronous request',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'async',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['similarweb'],
+				operation: ['getData'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['similarweb'],
+				operation: ['getData'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Fields',
+				name: 'fields',
+				type: 'string',
+				default: '',
+				description: 'Specific fields to return (comma-separated)',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
+					},
+				},
+			},
+		],
+	},
+];
+
+export const companyWebsiteFinderOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['companyWebsiteFinder'],
+			},
+		},
+		options: [
+			{
+				name: 'Find Website',
+				value: 'findWebsite',
+				description: 'Returns data from Company Website Finder businesses',
+				action: 'Find company website',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/company-website-finder',
+					},
+				},
+			},
+		],
+		default: 'findWebsite',
+	},
+];
+
+export const companyWebsiteFinderFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['companyWebsiteFinder'],
+				operation: ['findWebsite'],
+			},
+		},
+		description: 'Business names (e.g., Apple Inc, Microsoft Corporation, Tesla Motors)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Async Request',
+		name: 'async',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['companyWebsiteFinder'],
+				operation: ['findWebsite'],
+			},
+		},
+		description: 'Whether to make an asynchronous request',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'async',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['companyWebsiteFinder'],
+				operation: ['findWebsite'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['companyWebsiteFinder'],
+				operation: ['findWebsite'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Fields',
+				name: 'fields',
+				type: 'string',
+				default: '',
+				description: 'Specific fields to return (comma-separated)',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
+					},
+				},
+			},
+		],
+	},
+];

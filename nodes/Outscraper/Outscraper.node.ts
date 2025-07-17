@@ -99,6 +99,10 @@ import {
 	whitepagesAddressesFields,
 	phonesOwnersOperations,
 	phonesOwnersFields,
+	similarwebOperations,
+	similarwebFields,
+	companyWebsiteFinderOperations,
+	companyWebsiteFinderFields,
 } from './OthersDescription';
 
 import {
@@ -163,6 +167,10 @@ export class Outscraper implements INodeType {
 						value: 'companyInsights',
 					},
 					{
+						name: 'Company Website Finder',
+						value: 'companyWebsiteFinder',
+					},
+					{
 						name: 'Expedia',
 						value: 'expedia',
 					},
@@ -201,6 +209,10 @@ export class Outscraper implements INodeType {
 					{
 						name: 'Product Hunt',
 						value: 'productHunt',
+					},
+					{
+						name: 'Similarweb',
+						value: 'similarweb',
 					},
 					{
 						name: 'Target Review',
@@ -373,6 +385,14 @@ export class Outscraper implements INodeType {
 			// Phones Owners operations
 			...phonesOwnersOperations,
 			...phonesOwnersFields,
+
+			// Similarweb operations
+			...similarwebOperations,
+			...similarwebFields,
+
+			// Company Website Finder operations
+			...companyWebsiteFinderOperations,
+			...companyWebsiteFinderFields,
 		],
 	};
 }
