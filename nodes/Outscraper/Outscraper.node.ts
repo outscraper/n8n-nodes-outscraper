@@ -103,6 +103,8 @@ import {
 	similarwebFields,
 	companyWebsiteFinderOperations,
 	companyWebsiteFinderFields,
+	emailsAndContactsOperations,
+	emailsAndContactsFields,
 } from './OthersDescription';
 
 import {
@@ -169,6 +171,10 @@ export class Outscraper implements INodeType {
 					{
 						name: 'Company Website Finder',
 						value: 'companyWebsiteFinder',
+          },
+          {
+						name: 'Emails & Contact',
+						value: 'emailsAndContacts',
 					},
 					{
 						name: 'Expedia',
@@ -393,6 +399,10 @@ export class Outscraper implements INodeType {
 			// Company Website Finder operations
 			...companyWebsiteFinderOperations,
 			...companyWebsiteFinderFields,
+
+			// Emails & Contacts operations
+			...emailsAndContactsOperations,
+			...emailsAndContactsFields,
 		],
 	};
 }

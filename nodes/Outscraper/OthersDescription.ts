@@ -1532,7 +1532,7 @@ export const yellowPagesSearchOperations: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/yellowpages/search',
+						url: '/yellowpages-search',
 					},
 				},
 			},
@@ -1750,7 +1750,7 @@ export const phoneIdentityFinderOperations: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/whitepages/phones',
+						url: '/whitepages-phones',
 					},
 				},
 			},
@@ -1883,7 +1883,7 @@ export const whitepagesAddressesOperations: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/whitepages/addresses',
+						url: '/whitepages-addresses',
 					},
 				},
 			},
@@ -1995,6 +1995,36 @@ export const whitepagesAddressesFields: INodeProperties[] = [
 	},
 ];
 
+// Emails & Contacts
+export const emailsAndContactsOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['emailsAndContacts'],
+			},
+		},
+		options: [
+			{
+				name: 'Find Emails & Contacts',
+				value: 'findEmailsAndContacts',
+				description: 'Finds email addresses, social links, and phones from domains',
+				action: 'Find emails and contacts',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/emails-and-contacts',
+					},
+				},
+			},
+		],
+		default: 'findEmailsAndContacts',
+	},
+];
+
 // Phones Owners
 export const phonesOwnersOperations: INodeProperties[] = [
 	{
@@ -2016,12 +2046,134 @@ export const phonesOwnersOperations: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/phones/owners',
+						url: '/phones-owners',
 					},
 				},
 			},
 		],
 		default: 'getOwners',
+	},
+];
+
+export const emailsAndContactsFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['emailsAndContacts'],
+				operation: ['findEmailsAndContacts'],
+			},
+		},
+		description: 'Domain or link (e.g., outscraper.com)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Preferred Contacts',
+		name: 'preferredContacts',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['emailsAndContacts'],
+				operation: ['findEmailsAndContacts'],
+			},
+		},
+		description: 'Preferred contacts to find (comma-separated)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'preferredContacts',
+			},
+		},
+	},
+	{
+		displayName: 'Async Request',
+		name: 'async',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['emailsAndContacts'],
+				operation: ['findEmailsAndContacts'],
+			},
+		},
+		description: 'Whether to make an asynchronous request',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'async',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['emailsAndContacts'],
+				operation: ['findEmailsAndContacts'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['emailsAndContacts'],
+				operation: ['findEmailsAndContacts'],
+			},
+		},
+		options: [
+			{
+				displayName: 'Fields',
+				name: 'fields',
+				type: 'string',
+				default: '',
+				description: 'Specific fields to return (comma-separated)',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'fields',
+					},
+				},
+			},
+			{
+				displayName: 'UI',
+				name: 'ui',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to execute the request as a UI task',
+				routing: {
+					send: {
+						type: 'query',
+						property: 'ui',
+					},
+				},
+			},
+		],
 	},
 ];
 
