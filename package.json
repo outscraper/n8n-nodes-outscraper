@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-outscraper",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "n8n node to integrate with Outscraper API",
   "keywords": [
     "n8n-community-node-package",

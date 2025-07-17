@@ -1532,7 +1532,7 @@ export const yellowPagesSearchOperations: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/yellowpages/search',
+						url: '/yellowpages-search',
 					},
 				},
 			},
@@ -1750,7 +1750,7 @@ export const phoneIdentityFinderOperations: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/whitepages/phones',
+						url: '/whitepages-phones',
 					},
 				},
 			},
@@ -1883,7 +1883,7 @@ export const whitepagesAddressesOperations: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/whitepages/addresses',
+						url: '/whitepages-addresses',
 					},
 				},
 			},
@@ -2016,7 +2016,7 @@ export const phonesOwnersOperations: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/phones/owners',
+						url: '/phones-owners',
 					},
 				},
 			},
