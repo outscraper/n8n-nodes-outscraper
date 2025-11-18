@@ -23,6 +23,36 @@ export const googleMapsSearchOperations: INodeProperties[] = [
 						method: 'GET',
 						url: '/maps/search-v3',
 					},
+					send: {
+						preSend: [
+							async function (this, requestOptions) {
+								const enrichment = this.getNodeParameter('enrichment', 0) as string[] | undefined;
+
+								if (enrichment && enrichment.length > 0) {
+									// Remove 'fields' parameter to get all enrichment fields
+									if (requestOptions.qs?.fields) {
+										delete requestOptions.qs.fields;
+									}
+
+									// Build URL manually as n8n doesn't serialize arrays correctly for this API
+									const params = new URLSearchParams();
+									for (const [key, value] of Object.entries(requestOptions.qs || {})) {
+										if (value !== undefined && value !== null && value !== '') {
+											params.append(key, String(value));
+										}
+									}
+
+									// Add each enrichment as separate parameter
+									enrichment.forEach(val => params.append('enrichment', val));
+
+									requestOptions.url = `${requestOptions.url}?${params.toString()}`;
+									requestOptions.qs = {};
+								}
+
+								return requestOptions;
+							},
+						],
+					},
 				},
 			},
 			{
@@ -116,6 +146,66 @@ export const googleMapsSearchFields: INodeProperties[] = [
 				property: 'language',
 			},
 		},
+	},
+	{
+		displayName: 'Enrichment',
+		name: 'enrichment',
+		type: 'multiOptions',
+		default: [],
+		displayOptions: {
+			show: {
+				resource: ['googleMaps'],
+				operation: ['search'],
+			},
+		},
+		options: [
+			{
+				name: 'Chain Info',
+				value: 'ai_chain_info',
+				description: 'Identifies if a business is part of a chain, adding a true/false indication to your data',
+			},
+			{
+				name: 'Company Insights',
+				value: 'company_insights_service',
+				description: 'Finds company details such as revenue, size, founding year, public status, etc',
+			},
+			{
+				name: 'Company Website Finder',
+				value: 'company_websites_finder',
+				description: 'Finds company websites based on business names',
+			},
+			{
+				name: 'Contacts & Leads Enrichment',
+				value: 'contacts_n_leads',
+				description: 'Finds emails, social links, phones, and other contacts from websites',
+			},
+			{
+				name: 'Disposable Emails Checker',
+				value: 'disposable_email_checker',
+				description: 'Checks origins of email addresses (disposable, free, or corporate)',
+			},
+			{
+				name: 'Email Address Verifier',
+				value: 'emails_validator_service',
+				description: 'Validates emails, checks deliverability, filters out blacklists, spam traps, and complainers',
+			},
+			{
+				name: 'Phone Identity Finder',
+				value: 'whitepages_phones',
+				description: 'Returns insights about phone number owners (name, address, etc.)',
+			},
+			{
+				name: 'Phone Numbers Enricher',
+				value: 'phones_enricher_service',
+				description: 'Returns phones carrier data (name/type), validates phones, ensures messages deliverability',
+			},
+			{
+				name: 'Trustpilot Scraper',
+				value: 'trustpilot_service',
+				description: 'Returns data from a list of businesses',
+			},
+		],
+		description: 'Enrichments to apply to the results. Using enrichments increases response time, consider using async=true. Multiple enrichments can be selected.',
 	},
 	{
 		displayName: 'Async Request',
