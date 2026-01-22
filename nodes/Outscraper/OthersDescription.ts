@@ -432,7 +432,7 @@ export const webPageScreenshoterOperations: INodeProperties[] = [
 				routing: {
 					request: {
 						method: 'GET',
-						url: '/webpage-screenshoter',
+						url: '/screenshoter',
 					},
 				},
 			},
