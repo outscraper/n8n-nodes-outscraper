@@ -62,7 +62,7 @@ The Outscraper node supports the following platforms and operations:
 To use this node, you need an Outscraper API key.
 
 1. Create an account on [Outscraper](https://app.outscraper.com/signup)
-2. Navigate to the [API section](https://app.outscraper.com/api) to get your API key
+2. Navigate to the [account page](https://app.outscraper.com/account/api) to get your API key
 3. In n8n, create new credentials of type **Outscraper API**
 4. Enter your API key and the API URL (default: https://api.outscraper.cloud)
 
