@@ -91,6 +91,9 @@ To use this node, you need an Outscraper API key.
 
 ## Version History
 
+### 0.2.1 (2026-02-19)
+* New service AI Scraper
+
 ### 0.2.0 (2026-01-22)
 * Fixed screenshot service
 
