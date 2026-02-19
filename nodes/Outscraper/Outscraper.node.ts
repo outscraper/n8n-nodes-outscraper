@@ -77,6 +77,8 @@ import {
 	geocodingFields,
 	companyInsightsOperations,
 	companyInsightsFields,
+	aiScraperOperations,
+	aiScraperFields,
 	universalScraperOperations,
 	universalScraperFields,
 	webPageScreenshoterOperations,
@@ -152,6 +154,10 @@ export class Outscraper implements INodeType {
 				type: 'options',
 				noDataExpression: true,
 				options: [
+					{
+						name: 'AI Scraper',
+						value: 'aiScraper',
+					},
 					{
 						name: 'Airbnb',
 						value: 'airbnb',
@@ -342,6 +348,10 @@ export class Outscraper implements INodeType {
 			// Company Insights operations
 			...companyInsightsOperations,
 			...companyInsightsFields,
+
+			// AI Scraper operations
+			...aiScraperOperations,
+			...aiScraperFields,
 
 			// Universal Scraper operations
 			...universalScraperOperations,

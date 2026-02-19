@@ -411,6 +411,120 @@ export const universalScraperFields: INodeProperties[] = [
 	},
 ];
 
+// AI Scraper operation
+export const aiScraperOperations: INodeProperties[] = [
+	{
+		displayName: 'Operation',
+		name: 'operation',
+		type: 'options',
+		noDataExpression: true,
+		displayOptions: {
+			show: {
+				resource: ['aiScraper'],
+			},
+		},
+		options: [
+			{
+				name: 'Scrape',
+				value: 'scrape',
+				description: 'Extracts structured data from a webpage using AI',
+				action: 'Scrape web page with ai',
+				routing: {
+					request: {
+						method: 'GET',
+						url: '/universal-scraper-v3',
+					},
+				},
+			},
+		],
+		default: 'scrape',
+	},
+];
+
+export const aiScraperFields: INodeProperties[] = [
+	{
+		displayName: 'Query',
+		name: 'query',
+		type: 'string',
+		default: '',
+		placeholder: 'https://outscraper.com/',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['aiScraper'],
+				operation: ['scrape'],
+			},
+		},
+		description: 'Website link to scrape (e.g., https://outscraper.com/)',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query',
+			},
+		},
+	},
+	{
+		displayName: 'Query Schema',
+		name: 'querySchema',
+		type: 'string',
+		default: '',
+		placeholder: 'extract contacts, socials, and about info from the page',
+		required: true,
+		displayOptions: {
+			show: {
+				resource: ['aiScraper'],
+				operation: ['scrape'],
+			},
+		},
+		description: 'Description of what data should be parsed from the page',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'query_schema',
+			},
+		},
+	},
+	{
+		displayName: 'Async Request',
+		name: 'async',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['aiScraper'],
+				operation: ['scrape'],
+			},
+		},
+		description: 'Whether to make an asynchronous request',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'async',
+			},
+		},
+	},
+	{
+		displayName: 'Webhook',
+		name: 'webhook',
+		type: 'string',
+		default: '',
+		displayOptions: {
+			show: {
+				resource: ['aiScraper'],
+				operation: ['scrape'],
+			},
+		},
+		description: 'URL address (callback) to which Outscraper will create a POST request once the task is finished',
+		placeholder: 'https://your-webhook-url.com',
+		routing: {
+			send: {
+				type: 'query',
+				property: 'webhook',
+			},
+		},
+	},
+];
+
 // WebPage Screenshoter operation
 export const webPageScreenshoterOperations: INodeProperties[] = [
 	{
